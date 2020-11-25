@@ -1,5 +1,6 @@
 #songs {
-	/*  */
+	height: 100vh;
+		overflow-y: auto;
 }
 
 #songs > table {
@@ -76,8 +77,8 @@
 
 @media () {
 	#page > #songs {
-		height: ;
-		overflow-y: ;
+		height: 100vh;
+		overflow-y: auto;
 	}
 	#songs > table {
 		margin-bottom: 0;

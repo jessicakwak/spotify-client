@@ -2,49 +2,55 @@ import React from 'react'
 import { Howl } from 'howler'
 
 class Song extends React.Component {
-	state = {
-		playing: false,
-		audio: {}
-	}
+	constructor(props) {
+		super(props)
+	
+		this.state = {
+			playing: false,
+			audio: {}
+		}
+	}	
 	componentDidMount() {
 		let audio = new Howl({
 			html5: true,
-			src: []
+			src: [`${this.props.song.audio}`]
 		})
-		this.setState({ audio })
+		this.setState({ audio:audio })
 	}
 	play = () => {
-		//
-		this.setState({
-			playing: true
-		})
+			this.state.audio.play();
+			this.setState({
+				playing: true
+			})
 	}
 	stop = () => {
-		//
-		this.setState({
-			playing: false
-		})
+			this.state.audio.stop();
+			this.setState({
+				playing: false
+			})
 	}
 	render() {
+		const {song} = this.props
+
 		return (
 			<tr className={this.state.playing ? 'playing' : ''}>
 				<td>
 					{!this.state.playing ? (
 						<i
 							className="button far fa-play-circle"
-							onClick={e => this.play()}
+							onClick={e => this.props.play(this.state.audio)}
 						></i>
 					) : (
 						<i
 							className="button far fa-stop-circle"
-							onClick={e => this.stop()}
+							onClick={e => {}}
 						></i>
 					)}
 				</td>
-				<td>{this.props.song.name}</td>
-				<td>{this.props.song.artist}</td>
-				<td>{this.props.song.album}</td>
-				<td>{this.props.song.genre}</td>
+				<td>{song.name}</td>
+				<td>{song.artist.name}</td>
+				<td>{song.album.name}</td>
+				<td>{song.genre.name}</td>
 			</tr>
 		)
 	}
