@@ -45,16 +45,16 @@ class Sidebar extends React.Component {
 							</Link>
 						</li>
 						<li>
-							<a href="/artists" className={this.getTab('artists')}>
+							<Link to="/artists" className={this.getTab('artists')}>
 								<i className="fas fa-fw fa-users"></i>
 								<span>Artists</span>
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href="/genres" className={this.getTab('genres')}>
+							<Link to="/genres" className={this.getTab('genres')}>
 								<i className="fas fa-fw fa-guitar"></i>
 								<span>Genres</span>
-							</a>
+							</Link>
 						</li>
 					</ul>
 					<div id="upgrade">

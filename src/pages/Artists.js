@@ -2,8 +2,6 @@ import React from 'react'
 import axios from 'axios'
 
 import '../styles/albums.css'
-
-import Sidebar from '../components/Sidebar'
 import Artist from '../components/Artist'
 
 class Albums extends React.Component {
@@ -22,14 +20,11 @@ class Albums extends React.Component {
 	}
 	render() {
 		return (
-			<div id="page">
-				<Sidebar page="artists" />
 				<div id="albums">
 					{this.state.artists.map(artist => {
 						return <Artist artist={artist} />
 					})}
 				</div>
-			</div>
 		)
 	}
 }

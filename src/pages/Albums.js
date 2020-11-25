@@ -1,9 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
 import '../styles/albums.css'
-
-import Sidebar from '../components/Sidebar'
 import Album from '../components/Album'
 
 class Albums extends React.Component {
@@ -12,9 +9,9 @@ class Albums extends React.Component {
 	}
 	componentWillMount() {
 		axios
-			.get(``)
+			.get(`${process.env.REACT_APP_API}/albums`)
 			.then(res => {
-				this.setState({})
+				this.setState({albums:res.data})
 			})
 			.catch(err => {
 				console.log({ err })
@@ -22,14 +19,11 @@ class Albums extends React.Component {
 	}
 	render() {
 		return (
-			<div id="page">
-				<Sidebar page="albums" />
 				<div id="albums">
 					{this.state.albums.map(album => {
 						return <Album album={album} />
 					})}
 				</div>
-			</div>
 		)
 	}
 }

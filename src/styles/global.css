@@ -5,12 +5,17 @@ body {
 	background: #fff;
 	font-family: Roboto, sans-serif;
 	font-size: 14px;
-
+	/* overflow:hidden; */
 }
 
-#page {
+#root {
 	display: grid;
 	grid-template-columns: 200px auto;
+}
+
+.mainPage{
+	display:grid;
+	grid-template-rows: auto 80px;
 }
 
 button {
@@ -25,7 +30,7 @@ button {
 		height: 100vh;
 		overflow-y: hidden;
 	}
-	#page {
+	#root {
 		display: block;
 		position: relative;
 		height: 100vh;

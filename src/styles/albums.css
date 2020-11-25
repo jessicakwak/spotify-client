@@ -5,6 +5,9 @@
 	grid-column-gap: 50px;
 	grid-row-gap: 50px;
 	padding: 50px;
+	height: calc(100vh - 180px); 
+	overflow-y: auto;
+
 }
 
 #album {
@@ -12,6 +15,8 @@
 	display: grid;
 	grid-template-columns: 200px auto;
 	grid-column-gap: 50px;
+	height: calc(100vh - 180px); 
+	overflow-y: auto;
 }
 
 #album .album h2 {

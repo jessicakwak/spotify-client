@@ -5,14 +5,15 @@ import '../styles/album.css'
 
 class Album extends React.Component {
 	render() {
+		const{album}=this.props
 		return (
-			<Link to={''} className="album">
+			<Link to={`/albums/${album._id}`} className="album">
 				<div
 					className="cover"
-					style={{ backgroundImage: `url('')` }}
+					style={{ backgroundImage: `url('${album.cover}')` }}
 				></div>
-				<h3>{this.props.album.name}</h3>
-				<span>{this.props.album.artist}</span>
+				<h3>{album.name}</h3>
+				<span>{album.artist.name}</span>
 			</Link>
 		)
 	}

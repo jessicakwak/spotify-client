@@ -10,21 +10,23 @@ import Song from '../components/Song'
 class Album extends React.Component {
 	state = {
 		album: {},
+		artist:{},
 		songs: []
 	}
 	componentWillMount() {
 		axios
-			.get('')
+			.get(`${process.env.REACT_APP_API}/albums/${this.props.match.params.id}`)
 			.then(res => {
 				this.setState({
-					album: res.data
+					album: res.data,
+					artist:res.data.artist
 				})
 			})
 			.catch(err => {
 				console.log({ err })
 			})
 		axios
-			.get('')
+			.get(`${process.env.REACT_APP_API}/songs?album=${this.props.match.params.id}`)
 			.then(res => {
 				this.setState({
 					songs: res.data
@@ -35,9 +37,8 @@ class Album extends React.Component {
 			})
 	}
 	render() {
+		const {album, artist, songs} = this.state
 		return (
-			<div id="page">
-				<Sidebar page="albums" />
 				<div id="album">
 					<div className="album">
 						<div
@@ -46,16 +47,25 @@ class Album extends React.Component {
 						></div>
 						<div className="info">
 							<h2>{this.state.album.name}</h2>
-							<span>{this.state.album.artist}</span>
+							<span>{artist.name}</span>
 						</div>
 					</div>
 					<div id="songs">
 						<table>
-							{/* songs */}
+							<tbody>
+								{songs.map((s,i)=>{
+									return <tr>
+										<td></td>
+										<td>{s.name}</td>
+				<td>{s.artist.name}</td>
+				<td>{s.album.name}</td>
+				<td>{s.genre.name}</td>
+									</tr>
+								})}
+							</tbody>
 						</table>
 					</div>
 				</div>
-			</div>
 		)
 	}
 }

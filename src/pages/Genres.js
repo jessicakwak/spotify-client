@@ -24,14 +24,11 @@ class Genres extends React.Component {
 	}
 	render() {
 		return (
-			<div id="page">
-				<Sidebar page="genres" />
 				<div id="albums">
 					{this.state.genres.map(genre => {
 						return <Genre genre={genre} key={genre.id} />
 					})}
 				</div>
-			</div>
 		)
 	}
 }

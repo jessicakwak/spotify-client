@@ -4,8 +4,6 @@ import axios from 'axios'
 import '../styles/albums.css'
 import '../styles/songs.css'
 
-import Sidebar from '../components/Sidebar'
-import Song from '../components/Song'
 
 class Genre extends React.Component {
 	state = {
@@ -36,8 +34,6 @@ class Genre extends React.Component {
 	}
 	render() {
 		return (
-			<div id="page">
-				<Sidebar page="genres" />
 				<div id="album">
 					<div className="album">
 						<div
@@ -54,7 +50,6 @@ class Genre extends React.Component {
 						</table>
 					</div>
 				</div>
-			</div>
 		)
 	}
 }

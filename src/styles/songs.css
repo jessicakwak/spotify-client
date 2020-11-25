@@ -1,6 +1,6 @@
 #songs {
-	height: 100vh;
-		overflow-y: auto;
+	height: calc(100vh - 80px);
+	overflow-y: auto;
 }
 
 #songs > table {
