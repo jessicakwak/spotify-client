@@ -33,7 +33,7 @@ play = id=>{
 		})
 }
 	
-	stop = id =>{
+	stop = () =>{
 		if(this.state.nowPlaying!==""){
 			this.state.nowPlaying.stop();
 		}
@@ -41,7 +41,7 @@ play = id=>{
 		songsCopy.forEach(e=>e.playing =false);
 		this.setState({
 			songs:songsCopy,
-			nowPlaying:{}
+			nowPlaying:""
 		})
 
 	}
