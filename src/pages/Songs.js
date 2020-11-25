@@ -17,6 +17,7 @@ class Songs extends React.Component {
 
 play = id=>{
 	if(this.state.nowPlaying!==""){
+		//if there is any song playing currently
 		this.state.nowPlaying.stop();
 	}
 	let songsCopy = this.state.songs;
@@ -24,7 +25,11 @@ play = id=>{
 	songsCopy.filter(e=>e._id===id)[0].playing = true
 	let audio = new Howl({
 		html5: true,
-		src: [`${songsCopy.filter(e=>e._id===id)[0].audio}`]
+		src: [`${songsCopy.filter(e=>e._id===id)[0].audio}`],
+		onend: ()=> {
+			//play next song when this song ends
+			this.play(songsCopy[songsCopy.map(e=>e._id).indexOf(id)+1]._id)
+		  }
 	})
 	this.setState(
 		{songs:songsCopy,nowPlaying:audio},
