@@ -1,34 +1,22 @@
 import React from 'react'
-import { Howl } from 'howler'
 
 class Song extends React.Component {
 	constructor(props) {
 		super(props)
 	
 		this.state = {
-			playing: false,
-			audio: {}
+			playing: props.song.playing
 		}
 	}	
-	componentDidMount() {
-		let audio = new Howl({
-			html5: true,
-			src: [`${this.props.song.audio}`]
-		})
-		this.setState({ audio:audio })
+	static getDerivedStateFromProps(props,state){
+		if(props.song.playing!==state.playing){
+			return {
+				playing:props.song.playing
+			}
+		}
+		return null
 	}
-	play = () => {
-			this.state.audio.play();
-			this.setState({
-				playing: true
-			})
-	}
-	stop = () => {
-			this.state.audio.stop();
-			this.setState({
-				playing: false
-			})
-	}
+
 	render() {
 		const {song} = this.props
 
@@ -38,12 +26,16 @@ class Song extends React.Component {
 					{!this.state.playing ? (
 						<i
 							className="button far fa-play-circle"
-							onClick={e => this.props.play(this.state.audio)}
+							onClick={e => {
+								this.props.play(song._id);
+							}}
 						></i>
 					) : (
 						<i
 							className="button far fa-stop-circle"
-							onClick={e => {}}
+							onClick={e => {
+								this.props.stop();
+							}}
 						></i>
 					)}
 				</td>

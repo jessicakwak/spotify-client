@@ -11,24 +11,47 @@ class Songs extends React.Component {
 		
 		this.state = {
 			songs: []
-			,nowPlaying:{}
+			,nowPlaying:""
 		}
 	}
-play = audio=>{
-	this.setState({
-		nowPlaying:audio
-	},()=>{
-		this.state.nowPlaying.play()
+
+play = id=>{
+	if(this.state.nowPlaying!==""){
+		this.state.nowPlaying.stop();
+	}
+	let songsCopy = this.state.songs;
+	songsCopy.forEach(e=>e.playing =false);
+	songsCopy.filter(e=>e._id===id)[0].playing = true
+	let audio = new Howl({
+		html5: true,
+		src: [`${songsCopy.filter(e=>e._id===id)[0].audio}`]
 	})
+	this.setState(
+		{songs:songsCopy,nowPlaying:audio},
+		()=>{
+		this.state.nowPlaying.play();
+		})
 }
 	
+	stop = id =>{
+		if(this.state.nowPlaying!==""){
+			this.state.nowPlaying.stop();
+		}
+		let songsCopy = this.state.songs;
+		songsCopy.forEach(e=>e.playing =false);
+		this.setState({
+			songs:songsCopy,
+			nowPlaying:{}
+		})
+
+	}
+
 	componentDidMount() {
 		axios
 			.get(`${process.env.REACT_APP_API}/songs`)
 			.then(res => {
+				res.data.forEach(e=>e.playing=false)
 				this.setState({songs:res.data
-					// ,
-					// nowPlaying:audio
 				})
 			})
 			.catch(err => {
@@ -48,7 +71,9 @@ play = audio=>{
 							</tr>
 						</thead>
 						<tbody>{this.state.songs.map((s,i)=>{
-							return <Song song={s} key={i} play={this.play}
+							return <Song song={s} key={i} 
+							play={this.play}
+							stop={this.stop}
 							 />
 						}
 						)}</tbody>
