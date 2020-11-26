@@ -30,6 +30,7 @@ class App extends React.Component {
 		let songsCopy = this.state.songs;
 		songsCopy.forEach(e=>e.playing =false);
 		songsCopy.filter(e=>e._id===id)[0].playing = true
+
 		let audio = new Howl({
 			html5: true,
 			src: [`${songsCopy.filter(e=>e._id===id)[0].audio}`],
@@ -39,7 +40,8 @@ class App extends React.Component {
 			  }
 		})
 		this.setState(
-			{songs:songsCopy,nowPlaying:audio, currentSong:songsCopy.filter(e=>e._id===id)[0]},
+			{songs:songsCopy
+				,nowPlaying:audio, currentSong:songsCopy.filter(e=>e._id===id)[0]},
 			()=>{
 			this.state.nowPlaying.play();
 			})
@@ -79,7 +81,7 @@ class App extends React.Component {
 				<Route path="/albums/:id" component={Album} />
 					<Route path="/albums" component={Albums} />
 					<Route path="/artists/:id" component={Artist} />
-					<Route path="/artists" render={()=><Artists/>} />
+					<Route path="/artists" component={Artists} />
 					<Route path="/genres/:id" component={Genre} />
 					<Route path="/genres" component={Genres} />
 					<Route path="/" render={()=>{

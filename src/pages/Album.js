@@ -39,6 +39,8 @@ class Album extends React.Component {
 	render() {
 		const {album, artist, songs} = this.state
 		return (
+			// <div id="page">
+			// 	<Sidebar page="albums" />
 				<div id="album">
 					<div className="album">
 						<div
@@ -66,6 +68,7 @@ class Album extends React.Component {
 						</table>
 					</div>
 				</div>
+			// </div>
 		)
 	}
 }

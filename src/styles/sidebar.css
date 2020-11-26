@@ -37,7 +37,7 @@
 	color: #6e7e90;
 }
 
-#sidebar a.active {
+#sidebar Link.active {
 	background: #4289f5;
 	color: #fff;
 }
@@ -88,9 +88,8 @@
 
 /* Media */
 
-@media () {
-	/* sidebar */
-	#sidebar {
+/* @media () { */
+	/* #sidebar {
 		position: ;
 		bottom: ;
 		height: ;
@@ -123,7 +122,6 @@
 	#sidebar a span {
 		display: none;
 	}
-	/* Upgrade */
 	#upgrade {
 		position: relative;
 		display: block;
@@ -147,5 +145,5 @@
 	}
 	#upgrade button i {
 		display: inline-block;
-	}
-}
+	} */
+/* } */
