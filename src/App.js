@@ -144,6 +144,14 @@ class App extends React.Component {
 		
 	}
 
+	getTime=e=>{
+		let percentage = (e.pageX-document.getElementById("bar").offsetLeft)/document.getElementById("bar").offsetWidth
+		// (e.pageX-document.getElementById("bar").offsetLeft)
+		this.state.nowPlaying.seek(this.state.nowPlaying.duration()*percentage)
+		document.getElementById('current').style.width = e.pageX-document.getElementById("bar").offsetLeft
+		// console.log(this.state.nowPlaying.duration()*percentage)
+	}
+
 	utils = {
 		formatTime: secs=> {
 			var minutes = Math.floor(secs / 60) || 0;
@@ -175,9 +183,7 @@ class App extends React.Component {
 		}
 	}
 
-	getTime=e=>{
-		console.log(e.target.offsetRight)
-	}
+
 
 	componentDidMount() {
 		axios
@@ -220,7 +226,7 @@ class App extends React.Component {
 				<i className="fas fa-forward" id="forward" onClick={this.next}></i>
 				<br/>
 				<span id="timer">0:00 </span>
-				<div className="progressBar" onClick={this.getTime}><div id="current"></div></div>
+				<div className="progressBar" onClick={this.getTime} id="bar"><div id="current"></div></div>
 				<span id="duration">0:00 </span>
 				<i className="fas fa-random" id="random" onClick={this.shuffleToggle}></i>
 				</div>				

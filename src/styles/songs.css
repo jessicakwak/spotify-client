@@ -75,7 +75,7 @@
 
 /* Media */
 
-@media () {
+/* @media () {
 	#page > #songs {
 		height: 100vh;
 		overflow-y: auto;
@@ -100,4 +100,4 @@
 	#songs > table > tbody > tr > td:nth-child(5) {
 		display: none;
 	}
-}
+} */
