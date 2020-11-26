@@ -50,7 +50,7 @@ body {
 
 
 .fas.fa-random.selected{
-	color:tomato
+	color:#4289f5
 }
 #stopBtn{
 	display:none;
@@ -76,7 +76,7 @@ body {
 #current{
 	height:100%;
 	width:0;
-	background-color:tomato;
+	background-color:#4289f5;
 	border-radius:100px;
 }
 
@@ -90,6 +90,14 @@ body {
 
 button {
 	outline: none;
+}
+
+.genre{
+	color:black;
+	text-decoration: none;
+}
+tr.playing .genre{
+	color:white;
 }
 
 /* Media */

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class Song extends React.Component {
 	constructor(props) {
@@ -40,9 +41,21 @@ class Song extends React.Component {
 					)}
 				</td>
 				<td>{song.name}</td>
-				<td>{song.artist.name}</td> 
-				<td>{song.album.name}</td>
-				<td>{song.genre.name}</td>
+				<td>
+				<Link to={`/artists/${song.artist._id}`} className="artist">
+					{song.artist.name}
+				</Link>	
+					</td> 
+				<td>
+				<Link to={`/albums/${song.album._id}`} className="album">
+					{song.album.name}
+					</Link>
+					</td>
+				<td>
+				<Link to={`/genres/${song.genre._id}`} className="genre">
+					{song.genre.name}
+				</Link>
+					</td>
 			</tr>
 		)
 	}

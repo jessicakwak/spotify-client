@@ -9,13 +9,6 @@ class Sidebar extends React.Component {
 	state = {
 		paywallOpen: false
 	}
-	getTab = link => {
-		if (this.props.page === link) {
-			return 'active'
-		} else {
-			return ''
-		}
-	}
 	openPayWall = () => {
 		this.setState({
 			paywallOpen: true
@@ -33,25 +26,25 @@ class Sidebar extends React.Component {
 					<h1>Spotify?</h1>
 					<ul>
 						<li>
-							<Link to="/" className={this.getTab('songs')}>
+							<Link to="/" >
 								<i className="fas fa-fw fa-headphones-alt"></i>
 								<span>Songs</span>
 							</Link>
 						</li>
 						<li>
-							<Link to="/albums" className={this.getTab('albums')}>
+							<Link to="/albums">
 								<i className="fas fa-fw fa-record-vinyl"></i>
 								<span>Albums</span>
 							</Link>
 						</li>
 						<li>
-							<Link to="/artists" className={this.getTab('artists')}>
+							<Link to="/artists">
 								<i className="fas fa-fw fa-users"></i>
 								<span>Artists</span>
 							</Link>
 						</li>
 						<li>
-							<Link to="/genres" className={this.getTab('genres')}>
+							<Link to="/genres">
 								<i className="fas fa-fw fa-guitar"></i>
 								<span>Genres</span>
 							</Link>

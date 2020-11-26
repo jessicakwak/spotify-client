@@ -8,7 +8,7 @@ class Songs extends React.Component {
 		
 		this.state = {
 			songs: []
-			,nowPlaying:""
+			// ,nowPlaying:""
 		}
 	}
 

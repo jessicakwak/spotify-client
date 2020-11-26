@@ -198,7 +198,7 @@ class App extends React.Component {
 		
 		return (
 			<BrowserRouter>
-			<Sidebar />
+			<Sidebar/>
 			<div className="mainPage">
 				<div className="renderedPages">
 				<Switch>
