@@ -34,6 +34,10 @@ body {
 	justify-self:center;
 }
 
+.progressBar{
+	cursor:pointer
+}
+
 .far{
 	font-size:1.7rem;
 	margin-bottom:1%;

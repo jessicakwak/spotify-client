@@ -60,7 +60,9 @@ class App extends React.Component {
 				  document.getElementById('backward').style.display="inline-block"
 			  },
 			  onseek:()=>{
-				//   console.log('onseek')
+				let time = this.utils.formatTime(Math.round(audio.duration()))
+				  document.getElementById('duration').innerHTML = time
+				  requestAnimationFrame(this.utils.updateTimeTracker.bind(this));
 			  },
 			  onpause:()=>{
 				document.getElementById('playBtn').style.display="inline-block"
@@ -146,10 +148,10 @@ class App extends React.Component {
 
 	getTime=e=>{
 		let percentage = (e.pageX-document.getElementById("bar").offsetLeft)/document.getElementById("bar").offsetWidth
-		// (e.pageX-document.getElementById("bar").offsetLeft)
 		this.state.nowPlaying.seek(this.state.nowPlaying.duration()*percentage)
+		
 		document.getElementById('current').style.width = e.pageX-document.getElementById("bar").offsetLeft
-		// console.log(this.state.nowPlaying.duration()*percentage)
+
 	}
 
 	utils = {
