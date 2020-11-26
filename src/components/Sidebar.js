@@ -30,7 +30,7 @@ class Sidebar extends React.Component {
 		return (
 			<>
 				<div id="sidebar">
-					<h1>Spotify</h1>
+					<h1>Spotify?</h1>
 					<ul>
 						<li>
 							<Link to="/" className={this.getTab('songs')}>

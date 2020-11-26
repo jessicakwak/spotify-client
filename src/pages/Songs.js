@@ -13,7 +13,7 @@ class Songs extends React.Component {
 	}
 
 	static getDerivedStateFromProps(props,state){
-		if(props.song!=state.songs){
+		if(props.song!==state.songs){
 			return{songs:props.song}
 		}
 		return  null

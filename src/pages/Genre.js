@@ -25,7 +25,7 @@ class Genre extends React.Component {
 			})
 	}
 	render() {
-		const {genre, songs} = this.state
+		const {songs} = this.state
 		return (
 				<div id="album">
 					<div className="album">

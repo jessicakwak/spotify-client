@@ -33,7 +33,7 @@ class Album extends React.Component {
 			})
 	}
 	render() {
-		const {album, artist, songs} = this.state
+		const {artist, songs} = this.state
 		return (
 				<div id="album">
 					<div className="album">

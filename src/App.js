@@ -74,46 +74,51 @@ class App extends React.Component {
 			})
 	}
 		
-		stop = () =>{
-			if(this.state.nowPlaying!==""){
-				this.state.nowPlaying.stop();
-			}
-			let songsCopy = this.state.songs;
-			songsCopy.forEach(e=>e.playing =false);
-			this.setState({
-				songs:songsCopy
-			})
-	
+	stop = () =>{
+		if(this.state.nowPlaying!==""){
+			this.state.nowPlaying.stop();
 		}
-		pause = ()=>{
-			if(this.state.nowPlaying!==""){
-				this.state.nowPlaying.pause();
-			}
-		}
-		replay = ()=>{
-			this.state.nowPlaying.play();
-		}
+		let songsCopy = this.state.songs;
+		songsCopy.forEach(e=>e.playing =false);
+		this.setState({
+			songs:songsCopy
+		})	
+	}
 
-utils = {
-			formatTime: secs=> {
-				var minutes = Math.floor(secs / 60) || 0;
-				var seconds = (secs - minutes * 60) || 0;
-				return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-			},
+	pause = ()=>{
+		if(this.state.nowPlaying!==""){
+			this.state.nowPlaying.pause();
+		}
+	}
+
+	replay = ()=>{
+		this.state.nowPlaying.play();
+	}
+
+	utils = {
+		formatTime: secs=> {
+			var minutes = Math.floor(secs / 60) || 0;
+			var seconds = (secs - minutes * 60) || 0;
+			return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+		},
 			
-			updateTimeTracker: ()=> {
-				var self = this.state.nowPlaying;
-				var seek = this.state.nowPlaying.seek() || 0;
-				var currentTime = this.utils.formatTime(Math.round(seek));
+		updateTimeTracker: ()=> {
+			var self = this.state.nowPlaying;
+			var seek = this.state.nowPlaying.seek() || 0;
+			var currentTime = this.utils.formatTime(Math.round(seek));
 		
-				document.getElementById('timer').innerHTML=currentTime;
-				document.getElementById('current').style.width = (((seek / self.duration()) * 100) || 0) + '%';
+			document.getElementById('timer').innerHTML=currentTime;
+			document.getElementById('current').style.width = (((seek / self.duration()) * 100) || 0) + '%';
 				
-				if (self.playing()) {
-					requestAnimationFrame(this.utils.updateTimeTracker.bind(self));
-				}
+			if (self.playing()) {
+				requestAnimationFrame(this.utils.updateTimeTracker.bind(self));
 			}
 		}
+	}
+
+	getTime=e=>{
+		console.log(e.target.offsetRight)
+	}
 
 	componentDidMount() {
 		axios
@@ -127,6 +132,7 @@ utils = {
 				console.log({ err })
 			})
 	}
+
 	render() {
 		const {currentSong}=this.state
 		const songInfo = currentSong.name!==""? <p><strong>{currentSong.name}</strong> - {currentSong.artist.name}</p>:<p>Choose a song to play</p>
@@ -137,32 +143,25 @@ utils = {
 			<div className="mainPage">
 				<div className="renderedPages">
 				<Switch>
-				<Route path="/albums/:id" render={(props)=>{
-					return <Album {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>
-				}}/>
+					<Route path="/albums/:id" render={(props)=><Album {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>}/>
 					<Route path="/albums" component={Albums} />
-					<Route path="/artists/:id" render={(props)=>{
-						return <Artist {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>}}/>
+					<Route path="/artists/:id" render={(props)=><Artist {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>}/>
 					<Route path="/artists" component={Artists} />
-					<Route path="/genres/:id" render={(props)=>{
-						return <Genre {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>
-					}} />
+					<Route path="/genres/:id" render={(props)=><Genre {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>} />
 					<Route path="/genres" component={Genres} />
-					<Route path="/" render={()=>{
-						return <Songs song={this.state.songs} play={this.play} stop={this.stop}/>
-					}}/>
-					</Switch>
+					<Route path="/" render={()=><Songs song={this.state.songs} play={this.play} stop={this.stop}/>}/>
+				</Switch>
 				</div>
-				<div className="player">
-					<div className="songInfo">{songInfo}</div>
-					<div className="progress">
-					<i className="far fa-play-circle" id="playBtn" onClick={this.replay}></i>
-					<i className="far fa-pause-circle" id="stopBtn" onClick={this.pause}></i><br/>
-						<span id="timer">0:00 </span>
-					<div className="progressBar"><div id="current"></div></div>
-					<span id="duration">0:00 </span> 	</div>				
-				</div>
-				</div>
+			<div className="player">
+				<div className="songInfo">{songInfo}</div>
+				<div className="progress">
+				<i className="far fa-play-circle" id="playBtn" onClick={this.replay}></i>
+				<i className="far fa-pause-circle" id="stopBtn" onClick={this.pause}></i><br/>
+				<span id="timer">0:00 </span>
+				<div className="progressBar" onClick={this.getTime}><div id="current"></div></div>
+				<span id="duration">0:00 </span> 	</div>				
+			</div>
+			</div>
 			</BrowserRouter>
 		)
 	}

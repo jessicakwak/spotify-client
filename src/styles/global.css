@@ -35,7 +35,7 @@ body {
 }
 
 .far{
-	font-size:1.5rem;
+	font-size:1.7rem;
 	margin-bottom:1%
 }
 .far:hover{
@@ -59,7 +59,7 @@ body {
 #current{
 	height:100%;
 	width:0;
-	background-color:grey;
+	background-color:tomato;
 	border-radius:100px;
 }
 

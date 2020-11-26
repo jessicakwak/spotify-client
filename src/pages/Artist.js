@@ -25,7 +25,7 @@ class Artist extends React.Component {
 			})
 	}
 	render() {
-		const {artist, songs}=this.state
+		const {songs}=this.state
 		return (
 
 				<div id="album">
