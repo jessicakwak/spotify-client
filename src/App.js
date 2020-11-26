@@ -27,8 +27,8 @@ class App extends React.Component {
 				genre:{},
 				name:"",
 				playing:false
-			},
-			shufflePlay:false
+			}
+			,shufflePlay:false
 		}
 	}
 	play = id=>{
