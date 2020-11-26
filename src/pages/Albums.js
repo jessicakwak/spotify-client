@@ -4,10 +4,16 @@ import '../styles/albums.css'
 import Album from '../components/Album'
 
 class Albums extends React.Component {
-	state = {
-		albums: []
+	constructor(props) {
+		super(props)
+	
+		this.state = {
+			albums: []
+		}
 	}
-	componentWillMount() {
+	
+	
+	componentDidMount() {
 		axios
 			.get(`${process.env.REACT_APP_API}/albums`)
 			.then(res => {

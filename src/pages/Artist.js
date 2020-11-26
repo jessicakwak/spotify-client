@@ -12,22 +12,13 @@ class Artist extends React.Component {
 		artist: {},
 		songs: []
 	}
-	componentWillMount() {
+	componentDidMount() {
 		axios
-			.get('')
+			.get(`${process.env.REACT_APP_API}/artists/${this.props.match.params.id}`)
 			.then(res => {
 				this.setState({
-					artist: res.data
-				})
-			})
-			.catch(err => {
-				console.log({ err })
-			})
-		axios
-			.get('')
-			.then(res => {
-				this.setState({
-					songs: res.data
+					artist: res.data,
+					songs: this.props.songs.filter(e=>e.artist._id===res.data._id)
 				})
 			})
 			.catch(err => {
@@ -35,9 +26,9 @@ class Artist extends React.Component {
 			})
 	}
 	render() {
+		const {artist, songs}=this.state
 		return (
-			<div id="page">
-				<Sidebar page="artists" />
+
 				<div id="album">
 					<div className="album">
 						<div
@@ -50,11 +41,15 @@ class Artist extends React.Component {
 					</div>
 					<div id="songs">
 						<table>
-							{/* songs */}
+							<tbody>
+							{songs.map((s,i)=>{
+								return <Song song={s} key={i} play={this.props.play} stop={this.props.stop}/>
+							})}
+							</tbody>
 						</table>
 					</div>
 				</div>
-			</div>
+
 		)
 	}
 }

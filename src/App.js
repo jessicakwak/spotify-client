@@ -82,9 +82,12 @@ class App extends React.Component {
 					return <Album {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>
 				}}/>
 					<Route path="/albums" component={Albums} />
-					<Route path="/artists/:id" component={Artist} />
+					<Route path="/artists/:id" render={(props)=>{
+						return <Artist {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>}}/>
 					<Route path="/artists" component={Artists} />
-					<Route path="/genres/:id" component={Genre} />
+					<Route path="/genres/:id" render={(props)=>{
+						return <Genre {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>
+					}} />
 					<Route path="/genres" component={Genres} />
 					<Route path="/" render={()=>{
 						return <Songs song={this.state.songs} play={this.play} stop={this.stop}/>

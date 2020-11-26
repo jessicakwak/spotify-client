@@ -26,7 +26,7 @@ class Album extends React.Component {
 				this.setState({
 					album: res.data,
 					artist:res.data.artist,
-					songs:this.props.songs
+					songs:this.props.songs.filter(e=>e.album._id===res.data._id)
 				})
 			})
 			.catch(err => {
@@ -50,7 +50,7 @@ class Album extends React.Component {
 					<div id="songs">
 						<table>
 							<tbody>
-								{songs.filter(e=>e.album._id===album._id).map((s,i)=>{
+								{songs.map((s,i)=>{
 									return <Song song={s} play={this.props.play} stop={this.props.stop}/>
 								})}
 							</tbody>

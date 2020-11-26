@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import '../styles/albums.css'
 import '../styles/songs.css'
+import Song from '../components/Song'
 
 
 class Genre extends React.Component {
@@ -12,20 +13,11 @@ class Genre extends React.Component {
 	}
 	componentWillMount() {
 		axios
-			.get('')
+			.get(`${process.env.REACT_APP_API}/genres/${this.props.match.params.id}`)
 			.then(res => {
 				this.setState({
-					genre: res.data
-				})
-			})
-			.catch(err => {
-				console.log({ err })
-			})
-		axios
-			.get('')
-			.then(res => {
-				this.setState({
-					songs: res.data
+					genre: res.data,
+					songs:this.props.songs.filter(e=>e.genre._id===res.data._id)
 				})
 			})
 			.catch(err => {
@@ -33,6 +25,7 @@ class Genre extends React.Component {
 			})
 	}
 	render() {
+		const {genre, songs} = this.state
 		return (
 				<div id="album">
 					<div className="album">
@@ -46,7 +39,11 @@ class Genre extends React.Component {
 					</div>
 					<div id="songs">
 						<table>
-							{/* songs */}
+							<tbody>
+								{songs.map((s,i)=>{
+									return <Song song={s} key={i} play={this.props.play} stop={this.props.stop} />
+								})}
+							</tbody>
 						</table>
 					</div>
 				</div>

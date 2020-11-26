@@ -7,12 +7,18 @@ import Sidebar from '../components/Sidebar'
 import Genre from '../components/Genre'
 
 class Genres extends React.Component {
-	state = {
-		genres: []
+	constructor(props) {
+		super(props)
+	
+		this.state = {
+			genres: []
+		}
 	}
-	componentWillMount() {
+	
+	
+	componentDidMount() {
 		axios
-			.get('')
+			.get(`${process.env.REACT_APP_API}/genres`)
 			.then(res => {
 				this.setState({
 					genres: res.data
