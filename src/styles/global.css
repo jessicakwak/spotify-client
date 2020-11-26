@@ -36,15 +36,32 @@ body {
 
 .far{
 	font-size:1.7rem;
-	margin-bottom:1%
+	margin-bottom:1%;
+	margin-left:2%
 }
 .far:hover{
 	cursor:pointer;
+}
+.fas{
+	font-size:1.3rem;
+	margin-left:2%;
+	cursor:pointer;
+}
+
+
+.fas.fa-random.selected{
+	color:tomato
 }
 #stopBtn{
 	display:none;
 }
 #playBtn{
+	display:none;
+}
+#forward{
+	display:none;
+}
+#backward{
 	display:none;
 }
 

@@ -28,14 +28,11 @@ class App extends React.Component {
 				name:"",
 				playing:false
 			},
-			duration:""
+			shufflePlay:false
 		}
 	}
 	play = id=>{
-		if(this.state.nowPlaying!==""){
-			//if there is any song playing currently
-			this.state.nowPlaying.stop();
-		}
+		this.utils.stopAllSongs();
 		let songsCopy = this.state.songs;
 		songsCopy.forEach(e=>e.playing =false);
 		songsCopy.filter(e=>e._id===id)[0].playing = true
@@ -45,18 +42,25 @@ class App extends React.Component {
 			src: [`${songsCopy.filter(e=>e._id===id)[0].audio}`],
 			onend: ()=> {
 				//play next song when this song ends
-				this.play(songsCopy[songsCopy.map(e=>e._id).indexOf(id)+1]._id)
+				if(!this.state.shufflePlay){
+					// console.log('shuffle play is off')
+					this.play(songsCopy[songsCopy.map(e=>e._id).indexOf(id)+1]._id)
+				}else{
+					// console.log('shuffle play is on')
+					this.utils.chooseRandomSong()
+				}	
 			  },
 			  onplay:()=>{
-				//   console.log(this.utils.formatTime(Math.round(audio.duration())))
 				  let time = this.utils.formatTime(Math.round(audio.duration()))
 				  document.getElementById('duration').innerHTML = time
 				  requestAnimationFrame(this.utils.updateTimeTracker.bind(this));
 				  document.getElementById('playBtn').style.display="none"
 				  document.getElementById('stopBtn').style.display="inline-block"
+				  document.getElementById('forward').style.display="inline-block"
+				  document.getElementById('backward').style.display="inline-block"
 			  },
 			  onseek:()=>{
-				  console.log('onseek')
+				//   console.log('onseek')
 			  },
 			  onpause:()=>{
 				document.getElementById('playBtn').style.display="inline-block"
@@ -67,11 +71,26 @@ class App extends React.Component {
 			{songs:songsCopy
 			,nowPlaying:audio
 			,currentSong:songsCopy.filter(e=>e._id===id)[0]
-			// ,duration:Math.round(audio.duration())
 		},
 			()=>{
 			this.state.nowPlaying.play();
 			})
+	}
+
+	shuffleToggle = () =>{
+		if(this.state.shufflePlay){
+			this.setState({shufflePlay:false},
+				()=>{
+					document.getElementById("random").classList.remove("selected")
+				}
+				)
+		}else{
+			this.setState({shufflePlay:true},
+				()=>{
+					document.getElementById("random").classList.add("selected")
+				}
+				)
+		}
 	}
 		
 	stop = () =>{
@@ -95,6 +114,36 @@ class App extends React.Component {
 		this.state.nowPlaying.play();
 	}
 
+	next = () =>{
+		this.utils.stopAllSongs();
+		let songIndex = this.state.songs.map(e=>e._id).indexOf(this.state.currentSong._id)
+		if(!this.state.shufflePlay && songIndex < this.state.songs.length-1){
+			//play next song
+			this.play(this.state.songs[songIndex+1]._id)	
+		}else if(!this.state.shufflePlay && songIndex==this.state.songs.length-1){
+			//play the first song
+			this.play(this.state.songs[0]._id)
+		}else{
+			this.utils.chooseRandomSong();
+		}
+		
+	}
+
+	prev = () =>{
+		this.utils.stopAllSongs();
+		let songIndex = this.state.songs.map(e=>e._id).indexOf(this.state.currentSong._id)
+		if(!this.state.shufflePlay && songIndex !=0){
+			//play next song
+			this.play(this.state.songs[songIndex-1]._id)	
+		}else if(!this.state.shufflePlay && songIndex==0){
+			//play the first song
+			this.play(this.state.songs[this.state.songs.length-1]._id)
+		}else{
+			this.utils.chooseRandomSong();
+		}
+		
+	}
+
 	utils = {
 		formatTime: secs=> {
 			var minutes = Math.floor(secs / 60) || 0;
@@ -112,6 +161,16 @@ class App extends React.Component {
 				
 			if (self.playing()) {
 				requestAnimationFrame(this.utils.updateTimeTracker.bind(self));
+			}
+		},
+
+		chooseRandomSong: ()=>{
+			this.play(this.state.songs[Math.floor(Math.random()*this.state.songs.length)]._id)
+		},
+		stopAllSongs:()=>{
+			if(this.state.nowPlaying!==""){
+				//if there is any song playing currently
+				this.state.nowPlaying.stop();
 			}
 		}
 	}
@@ -155,11 +214,16 @@ class App extends React.Component {
 			<div className="player">
 				<div className="songInfo">{songInfo}</div>
 				<div className="progress">
+				<i className="fas fa-backward" id="backward" onClick={this.prev}></i>
 				<i className="far fa-play-circle" id="playBtn" onClick={this.replay}></i>
-				<i className="far fa-pause-circle" id="stopBtn" onClick={this.pause}></i><br/>
+				<i className="far fa-pause-circle" id="stopBtn" onClick={this.pause}></i>
+				<i className="fas fa-forward" id="forward" onClick={this.next}></i>
+				<br/>
 				<span id="timer">0:00 </span>
 				<div className="progressBar" onClick={this.getTime}><div id="current"></div></div>
-				<span id="duration">0:00 </span> 	</div>				
+				<span id="duration">0:00 </span>
+				<i className="fas fa-random" id="random" onClick={this.shuffleToggle}></i>
+				</div>				
 			</div>
 			</div>
 			</BrowserRouter>
