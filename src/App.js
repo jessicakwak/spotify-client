@@ -149,7 +149,7 @@ class App extends React.Component {
 	getTime=e=>{
 		let percentage = (e.pageX-document.getElementById("bar").offsetLeft)/document.getElementById("bar").offsetWidth
 		this.state.nowPlaying.seek(this.state.nowPlaying.duration()*percentage)
-		
+
 		document.getElementById('current').style.width = e.pageX-document.getElementById("bar").offsetLeft
 
 	}
