@@ -1,7 +1,4 @@
 import React from 'react'
-import axios from 'axios'
-import { Howl } from 'howler'
-// import Sidebar from '../components/Sidebar'
 import Song from '../components/Song'
 import '../styles/songs.css'
 

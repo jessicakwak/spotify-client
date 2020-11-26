@@ -23,7 +23,52 @@ body {
 	-moz-box-shadow: 1px 8px 37px 0px rgba(0,0,0,0.23);
 	box-shadow: 1px 8px 37px 0px rgba(0,0,0,0.23);
 	border-top:1px solid  rgba(0,0,0,0.10);
-	text-align:center
+	display:grid;
+	grid-template-columns:0.35fr 0.65fr;
+	align-items:center;
+	justify-items:center
+}
+.progress{
+	width:90%;
+	text-align:center;
+	justify-self:center;
+}
+
+.far{
+	font-size:1.5rem;
+	margin-bottom:1%
+}
+.far:hover{
+	cursor:pointer;
+}
+#stopBtn{
+	display:none;
+}
+#playBtn{
+	display:none;
+}
+
+.progressBar{
+	display:inline-block;
+	width:30vw;
+	height:10px;
+	background-color:lightgray;
+	border-radius:100px
+}
+
+#current{
+	height:100%;
+	width:0;
+	background-color:grey;
+	border-radius:100px;
+}
+
+#timer{
+	margin-right:2%
+}
+
+#duration{
+	margin-left:2%
 }
 
 button {

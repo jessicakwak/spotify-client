@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import '../styles/albums.css'
 
-import Sidebar from '../components/Sidebar'
 import Genre from '../components/Genre'
 
 class Genres extends React.Component {

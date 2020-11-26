@@ -4,7 +4,6 @@ import axios from 'axios'
 import '../styles/albums.css'
 import '../styles/songs.css'
 
-import Sidebar from '../components/Sidebar'
 import Song from '../components/Song'
 
 class Artist extends React.Component {

@@ -19,7 +19,16 @@ class App extends React.Component {
 		this.state = {
 			songs: []
 			,nowPlaying:""
-			,currentSong:{}
+			,currentSong:{
+				_id:"",
+				album:{},
+				artist:{},
+				audio:"",
+				genre:{},
+				name:"",
+				playing:false
+			},
+			duration:""
 		}
 	}
 	play = id=>{
@@ -37,11 +46,29 @@ class App extends React.Component {
 			onend: ()=> {
 				//play next song when this song ends
 				this.play(songsCopy[songsCopy.map(e=>e._id).indexOf(id)+1]._id)
+			  },
+			  onplay:()=>{
+				//   console.log(this.utils.formatTime(Math.round(audio.duration())))
+				  let time = this.utils.formatTime(Math.round(audio.duration()))
+				  document.getElementById('duration').innerHTML = time
+				  requestAnimationFrame(this.utils.updateTimeTracker.bind(this));
+				  document.getElementById('playBtn').style.display="none"
+				  document.getElementById('stopBtn').style.display="inline-block"
+			  },
+			  onseek:()=>{
+				  console.log('onseek')
+			  },
+			  onpause:()=>{
+				document.getElementById('playBtn').style.display="inline-block"
+				document.getElementById('stopBtn').style.display="none"
 			  }
 		})
 		this.setState(
 			{songs:songsCopy
-				,nowPlaying:audio, currentSong:songsCopy.filter(e=>e._id===id)[0]},
+			,nowPlaying:audio
+			,currentSong:songsCopy.filter(e=>e._id===id)[0]
+			// ,duration:Math.round(audio.duration())
+		},
 			()=>{
 			this.state.nowPlaying.play();
 			})
@@ -54,11 +81,40 @@ class App extends React.Component {
 			let songsCopy = this.state.songs;
 			songsCopy.forEach(e=>e.playing =false);
 			this.setState({
-				songs:songsCopy,
-				nowPlaying:""
+				songs:songsCopy
 			})
 	
 		}
+		pause = ()=>{
+			if(this.state.nowPlaying!==""){
+				this.state.nowPlaying.pause();
+			}
+		}
+		replay = ()=>{
+			this.state.nowPlaying.play();
+		}
+
+utils = {
+			formatTime: secs=> {
+				var minutes = Math.floor(secs / 60) || 0;
+				var seconds = (secs - minutes * 60) || 0;
+				return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+			},
+			
+			updateTimeTracker: ()=> {
+				var self = this.state.nowPlaying;
+				var seek = this.state.nowPlaying.seek() || 0;
+				var currentTime = this.utils.formatTime(Math.round(seek));
+		
+				document.getElementById('timer').innerHTML=currentTime;
+				document.getElementById('current').style.width = (((seek / self.duration()) * 100) || 0) + '%';
+				
+				if (self.playing()) {
+					requestAnimationFrame(this.utils.updateTimeTracker.bind(self));
+				}
+			}
+		}
+
 	componentDidMount() {
 		axios
 			.get(`${process.env.REACT_APP_API}/songs`)
@@ -72,6 +128,9 @@ class App extends React.Component {
 			})
 	}
 	render() {
+		const {currentSong}=this.state
+		const songInfo = currentSong.name!==""? <p><strong>{currentSong.name}</strong> - {currentSong.artist.name}</p>:<p>Choose a song to play</p>
+		
 		return (
 			<BrowserRouter>
 			<Sidebar />
@@ -94,8 +153,15 @@ class App extends React.Component {
 					}}/>
 					</Switch>
 				</div>
-				<div className="player"><p>Currently playing {this.state.currentSong.name}</p> </div>
-				
+				<div className="player">
+					<div className="songInfo">{songInfo}</div>
+					<div className="progress">
+					<i className="far fa-play-circle" id="playBtn" onClick={this.replay}></i>
+					<i className="far fa-pause-circle" id="stopBtn" onClick={this.pause}></i><br/>
+						<span id="timer">0:00 </span>
+					<div className="progressBar"><div id="current"></div></div>
+					<span id="duration">0:00 </span> 	</div>				
+				</div>
 				</div>
 			</BrowserRouter>
 		)
