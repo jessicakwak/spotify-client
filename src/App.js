@@ -78,7 +78,9 @@ class App extends React.Component {
 			<div className="mainPage">
 				<div className="renderedPages">
 				<Switch>
-				<Route path="/albums/:id" component={Album} />
+				<Route path="/albums/:id" render={(props)=>{
+					return <Album {...props} songs={this.state.songs} play={this.play} stop={this.stop}/>
+				}}/>
 					<Route path="/albums" component={Albums} />
 					<Route path="/artists/:id" component={Artist} />
 					<Route path="/artists" component={Artists} />
@@ -89,7 +91,7 @@ class App extends React.Component {
 					}}/>
 					</Switch>
 				</div>
-				<div className="player">Currently playing {this.state.currentSong.name} </div>
+				<div className="player"><p>Currently playing {this.state.currentSong.name}</p> </div>
 				
 				</div>
 			</BrowserRouter>

@@ -40,7 +40,7 @@ class Song extends React.Component {
 					)}
 				</td>
 				<td>{song.name}</td>
-				<td>{song.artist.name}</td>
+				<td>{song.artist.name}</td> 
 				<td>{song.album.name}</td>
 				<td>{song.genre.name}</td>
 			</tr>
