@@ -24,8 +24,8 @@ class Sidebar extends React.Component {
 		return (
 			<>
 				<div id="sidebar">
-					{/* <h1>Spotify?</h1> */}
-					<img  src={Logo} alt="logo" className="logo"/>
+					<h1>Spotify?</h1>
+					{/* <img  src={Logo} alt="logo" className="logo"/> */}
 					<ul>
 						<li>
 							<Link to="/" >

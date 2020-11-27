@@ -8,7 +8,7 @@
 }
 
 #sidebar h1 {
-	padding-left: 30px;
+	/* padding-left: 30px; */
 }
 
 #sidebar ul {
@@ -19,7 +19,7 @@
 #sidebar a {
 	text-decoration: none;
 	font-size: 16px;
-	padding: 10px 5px 10px 0;
+	padding: 10px 10px 10px 0;
 	display: block;
 }
 
@@ -93,13 +93,13 @@
 }
 
 /* Media */
-
-/* @media () { */
-	/* #sidebar {
-		position: ;
-		bottom: ;
-		height: ;
-		width: ;
+/* 
+@media (max-width: 500px) {
+	#sidebar {
+		position: absolute;
+		bottom: 0;
+		height: 65px;
+		width: 100%;
 		display: grid;
 		grid-template-columns: 4fr 1fr;
 		border-right: 0;
@@ -151,5 +151,5 @@
 	}
 	#upgrade button i {
 		display: inline-block;
-	} */
-/* } */
+	}
+ } */
