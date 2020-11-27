@@ -4,6 +4,7 @@
 	box-sizing: border-box;
 	position: relative;
 	overflow:hidden;
+	text-align:center;
 }
 
 #sidebar h1 {
@@ -18,7 +19,7 @@
 #sidebar a {
 	text-decoration: none;
 	font-size: 16px;
-	padding: 10px 0 10px 30px;
+	padding: 10px 5px 10px 0;
 	display: block;
 }
 
@@ -84,6 +85,11 @@
 
 #upgrade button i {
 	display: none;
+}
+
+.logo{
+	width:40%;
+	margin:10% 0;
 }
 
 /* Media */

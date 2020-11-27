@@ -1,5 +1,5 @@
 import React from 'react'
-import {} from 'react-stripe-elements'
+import { } from 'react-stripe-elements'
 
 import '../styles/paywall.css'
 
@@ -16,7 +16,8 @@ class Paywall extends React.Component {
 						onClick={() => this.props.closePaywall()}
 					></i>
 					<h2>Upgrade to Premium</h2>
-					{/* stripe */}
+					{/* <StripeProvider apiKey="pk_test_12345">
+    </StripeProvider> */}
 				</div>
 			</div>
 		)

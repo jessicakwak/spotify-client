@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import '../styles/sidebar.css'
+import Logo from '../assets/spotifyClone.png' 
 
 import Paywall from './Paywall'
 
@@ -23,7 +24,8 @@ class Sidebar extends React.Component {
 		return (
 			<>
 				<div id="sidebar">
-					<h1>Spotify?</h1>
+					{/* <h1>Spotify?</h1> */}
+					<img  src={Logo} alt="logo" className="logo"/>
 					<ul>
 						<li>
 							<Link to="/" >
@@ -50,19 +52,19 @@ class Sidebar extends React.Component {
 							</Link>
 						</li>
 					</ul>
-					<div id="upgrade">
+					{/* <div id="upgrade">
 						<h3>Get Premium</h3>
 						<p>Play unlimited music with no ads.</p>
 						<button onClick={this.openPayWall}>
 							<span>Upgrade Now</span>
 							<i className="fas fa-fw fa-arrow-up"></i>
 						</button>
-					</div>
+					</div> */}
 				</div>
-				<Paywall
+				{/* <Paywall
 					paywallOpen={this.state.paywallOpen}
 					closePaywall={this.closePaywall}
-				/>
+				/> */}
 			</>
 		)
 	}
